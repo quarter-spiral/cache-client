@@ -13,6 +13,7 @@ module Cache
   class Client
     attr_reader :backend
     def initialize(backend, *args)
+      backend = Cache::Backend::NoopBackend if !args.empty? && args.compact.empty?
       @backend = backendify(backend).new(*args)
     end
 

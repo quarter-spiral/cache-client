@@ -38,6 +38,18 @@ describe Cache::Client do
       client.backend.args.must_equal([1, 2, 3, {'four' => :five}])
     end
 
+    it "uses the noop backend if all arguments are nil" do
+      client = Cache::Client.new(Cache::InMemoryBackend, 1, 2, 3, {'four' => :five})
+      client.backend.kind_of?(Cache::InMemoryBackend).must_equal true
+
+      client = Cache::Client.new(Cache::InMemoryBackend)
+      client.backend.kind_of?(Cache::InMemoryBackend).must_equal true
+
+      client = Cache::Client.new(Cache::InMemoryBackend, nil)
+      client.backend.kind_of?(Cache::InMemoryBackend).must_equal false
+      client.backend.kind_of?(Cache::Backend::NoopBackend).must_equal true
+    end
+
     describe "that are initialized" do
       before do
         @client = Cache::Client.new(Cache::InMemoryBackend)
