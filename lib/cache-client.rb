@@ -43,8 +43,8 @@ module Cache
       clazz
     end
 
-    def keyify(key)
-      Array(key).map {|e| KeyBuilder.new(key)}.join('-')
+    def keyify(keys)
+      Array(keys).map {|key| KeyBuilder.new(key)}.join('-')
     end
   end
 end

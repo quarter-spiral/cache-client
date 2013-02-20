@@ -26,6 +26,18 @@ describe Cache::Client do
       client.backend.kind_of?(Cache::InMemoryBackend).must_equal true
     end
 
+    it "passes a list of options through to the backend" do
+      class ArgumentTestBackend
+        attr_reader :args
+        def initialize(*args)
+          @args = args
+        end
+      end
+
+      client = Cache::Client.new(ArgumentTestBackend, 1, 2, 3, {'four' => :five})
+      client.backend.args.must_equal([1, 2, 3, {'four' => :five}])
+    end
+
     describe "that are initialized" do
       before do
         @client = Cache::Client.new(Cache::InMemoryBackend)

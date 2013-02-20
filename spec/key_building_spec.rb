@@ -59,5 +59,16 @@ describe Cache::Client do
 
       @client.backend.last_key.must_equal(expected_key)
     end
+
+    it "concatenates built keys for arrays of keys" do
+      key1 = ObectWithToCacheKey.new('bla')
+      key2 = ObectWithoutToCacheKey.new('bla')
+      key3 = 'yeah'
+      key4 = 65.7
+
+      @client.get([key1, key2, key3, key4])
+      expected_key = "#{key1.to_cache_key}-#{Digest::SHA1.hexdigest(Marshal.dump(key2))}-#{key3}-#{key4}"
+      @client.backend.last_key.must_equal(expected_key)
+    end
   end
 end
