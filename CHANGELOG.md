@@ -1,4 +1,4 @@
-# 0.0.3 WIP
+# 0.0.3
 
 * Fixes cache key generation for arrays of keys
 * Adds specs
