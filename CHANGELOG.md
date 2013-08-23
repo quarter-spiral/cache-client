@@ -1,3 +1,7 @@
+# 0.0.5 / Unreleased
+
+* Corrects README
+
 # 0.0.4
 
 * Fixes handling of ``nil`` argument lists

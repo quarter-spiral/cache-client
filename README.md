@@ -46,7 +46,7 @@ cache_client.get(['my', 'key']) # => 123
 This will set a value in the cache if the given key does not exist, otherwise it just returns the value under that key from the cache.
 
 ```ruby
-cache_client.get(['my', 'key']) do
+cache_client.fetch(['my', 'key']) do
   123
 end # => 123
 ```
